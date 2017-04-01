@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mybatis.mapper.PbEmpLeaveBatchItemMapper" >
+  <resultMap id="BaseResultMap" type="com.mybatis.entity.PbEmpLeaveBatchItem" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="batch_id" property="batchId" jdbcType="VARCHAR" />
+    <result column="EMP_NAME" property="empName" jdbcType="VARCHAR" />
+    <result column="EMP_CODE" property="empCode" jdbcType="VARCHAR" />
+    <result column="COMPANY_CODE" property="companyCode" jdbcType="VARCHAR" />
+    <result column="APPLY_OFF_POST_DATE" property="applyOffPostDate" jdbcType="DATE" />
+    <result column="END_DATE" property="endDate" jdbcType="DATE" />
+    <result column="ACCUM_FUND_ACCOUNT" property="accumFundAccount" jdbcType="VARCHAR" />
+    <result column="OFF_POST_REASON" property="offPostReason" jdbcType="VARCHAR" />
+    <result column="OFF_POST_DESC" property="offPostDesc" jdbcType="VARCHAR" />
+    <result column="TRANSFER_TYPE" property="transferType" jdbcType="VARCHAR" />
+    <result column="is_valid" property="isValid" jdbcType="VARCHAR" />
+    <result column="is_del" property="isDel" jdbcType="VARCHAR" />
+    <result column="CREATE_USER_ID" property="createUserId" jdbcType="VARCHAR" />
+    <result column="CREATE_USER_NAME" property="createUserName" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="LAST_UPDATE_USER_ID" property="lastUpdateUserId" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATE_USER_NAME" property="lastUpdateUserName" jdbcType="VARCHAR" />
+    <result column="LAST_UPDATE_DATE" property="lastUpdateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, batch_id, EMP_NAME, EMP_CODE, COMPANY_CODE, APPLY_OFF_POST_DATE, END_DATE, ACCUM_FUND_ACCOUNT, 
+    OFF_POST_REASON, OFF_POST_DESC, TRANSFER_TYPE, is_valid, is_del, CREATE_USER_ID, 
+    CREATE_USER_NAME, CREATE_DATE, LAST_UPDATE_USER_ID, LAST_UPDATE_USER_NAME, LAST_UPDATE_DATE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mybatis.entity.PbEmpLeaveBatchItemExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pb_emp_leave_batch_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from pb_emp_leave_batch_item
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from pb_emp_leave_batch_item
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mybatis.entity.PbEmpLeaveBatchItemExample" >
+    delete from pb_emp_leave_batch_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mybatis.entity.PbEmpLeaveBatchItem" >
+    insert into pb_emp_leave_batch_item (ID, batch_id, EMP_NAME, 
+      EMP_CODE, COMPANY_CODE, APPLY_OFF_POST_DATE, 
+      END_DATE, ACCUM_FUND_ACCOUNT, OFF_POST_REASON, 
+      OFF_POST_DESC, TRANSFER_TYPE, is_valid, 
+      is_del, CREATE_USER_ID, CREATE_USER_NAME, 
+      CREATE_DATE, LAST_UPDATE_USER_ID, LAST_UPDATE_USER_NAME, 
+      LAST_UPDATE_DATE)
+    values (#{id,jdbcType=VARCHAR}, #{batchId,jdbcType=VARCHAR}, #{empName,jdbcType=VARCHAR}, 
+      #{empCode,jdbcType=VARCHAR}, #{companyCode,jdbcType=VARCHAR}, #{applyOffPostDate,jdbcType=DATE}, 
+      #{endDate,jdbcType=DATE}, #{accumFundAccount,jdbcType=VARCHAR}, #{offPostReason,jdbcType=VARCHAR}, 
+      #{offPostDesc,jdbcType=VARCHAR}, #{transferType,jdbcType=VARCHAR}, #{isValid,jdbcType=VARCHAR}, 
+      #{isDel,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{lastUpdateUserId,jdbcType=VARCHAR}, #{lastUpdateUserName,jdbcType=VARCHAR}, 
+      #{lastUpdateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mybatis.entity.PbEmpLeaveBatchItem" >
+    insert into pb_emp_leave_batch_item
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="batchId != null" >
+        batch_id,
+      </if>
+      <if test="empName != null" >
+        EMP_NAME,
+      </if>
+      <if test="empCode != null" >
+        EMP_CODE,
+      </if>
+      <if test="companyCode != null" >
+        COMPANY_CODE,
+      </if>
+      <if test="applyOffPostDate != null" >
+        APPLY_OFF_POST_DATE,
+      </if>
+      <if test="endDate != null" >
+        END_DATE,
+      </if>
+      <if test="accumFundAccount != null" >
+        ACCUM_FUND_ACCOUNT,
+      </if>
+      <if test="offPostReason != null" >
+        OFF_POST_REASON,
+      </if>
+      <if test="offPostDesc != null" >
+        OFF_POST_DESC,
+      </if>
+      <if test="transferType != null" >
+        TRANSFER_TYPE,
+      </if>
+      <if test="isValid != null" >
+        is_valid,
+      </if>
+      <if test="isDel != null" >
+        is_del,
+      </if>
+      <if test="createUserId != null" >
+        CREATE_USER_ID,
+      </if>
+      <if test="createUserName != null" >
+        CREATE_USER_NAME,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="lastUpdateUserId != null" >
+        LAST_UPDATE_USER_ID,
+      </if>
+      <if test="lastUpdateUserName != null" >
+        LAST_UPDATE_USER_NAME,
+      </if>
+      <if test="lastUpdateDate != null" >
+        LAST_UPDATE_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="batchId != null" >
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="empName != null" >
+        #{empName,jdbcType=VARCHAR},
+      </if>
+      <if test="empCode != null" >
+        #{empCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null" >
+        #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="applyOffPostDate != null" >
+        #{applyOffPostDate,jdbcType=DATE},
+      </if>
+      <if test="endDate != null" >
+        #{endDate,jdbcType=DATE},
+      </if>
+      <if test="accumFundAccount != null" >
+        #{accumFundAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="offPostReason != null" >
+        #{offPostReason,jdbcType=VARCHAR},
+      </if>
+      <if test="offPostDesc != null" >
+        #{offPostDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="transferType != null" >
+        #{transferType,jdbcType=VARCHAR},
+      </if>
+      <if test="isValid != null" >
+        #{isValid,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null" >
+        #{isDel,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserName != null" >
+        #{createUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateUserId != null" >
+        #{lastUpdateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateUserName != null" >
+        #{lastUpdateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateDate != null" >
+        #{lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mybatis.entity.PbEmpLeaveBatchItemExample" resultType="java.lang.Integer" >
+    select count(*) from pb_emp_leave_batch_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update pb_emp_leave_batch_item
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.batchId != null" >
+        batch_id = #{record.batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.empName != null" >
+        EMP_NAME = #{record.empName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.empCode != null" >
+        EMP_CODE = #{record.empCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyCode != null" >
+        COMPANY_CODE = #{record.companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyOffPostDate != null" >
+        APPLY_OFF_POST_DATE = #{record.applyOffPostDate,jdbcType=DATE},
+      </if>
+      <if test="record.endDate != null" >
+        END_DATE = #{record.endDate,jdbcType=DATE},
+      </if>
+      <if test="record.accumFundAccount != null" >
+        ACCUM_FUND_ACCOUNT = #{record.accumFundAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.offPostReason != null" >
+        OFF_POST_REASON = #{record.offPostReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.offPostDesc != null" >
+        OFF_POST_DESC = #{record.offPostDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transferType != null" >
+        TRANSFER_TYPE = #{record.transferType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isValid != null" >
+        is_valid = #{record.isValid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDel != null" >
+        is_del = #{record.isDel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createUserId != null" >
+        CREATE_USER_ID = #{record.createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createUserName != null" >
+        CREATE_USER_NAME = #{record.createUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdateUserId != null" >
+        LAST_UPDATE_USER_ID = #{record.lastUpdateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastUpdateUserName != null" >
+        LAST_UPDATE_USER_NAME = #{record.lastUpdateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastUpdateDate != null" >
+        LAST_UPDATE_DATE = #{record.lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update pb_emp_leave_batch_item
+    set ID = #{record.id,jdbcType=VARCHAR},
+      batch_id = #{record.batchId,jdbcType=VARCHAR},
+      EMP_NAME = #{record.empName,jdbcType=VARCHAR},
+      EMP_CODE = #{record.empCode,jdbcType=VARCHAR},
+      COMPANY_CODE = #{record.companyCode,jdbcType=VARCHAR},
+      APPLY_OFF_POST_DATE = #{record.applyOffPostDate,jdbcType=DATE},
+      END_DATE = #{record.endDate,jdbcType=DATE},
+      ACCUM_FUND_ACCOUNT = #{record.accumFundAccount,jdbcType=VARCHAR},
+      OFF_POST_REASON = #{record.offPostReason,jdbcType=VARCHAR},
+      OFF_POST_DESC = #{record.offPostDesc,jdbcType=VARCHAR},
+      TRANSFER_TYPE = #{record.transferType,jdbcType=VARCHAR},
+      is_valid = #{record.isValid,jdbcType=VARCHAR},
+      is_del = #{record.isDel,jdbcType=VARCHAR},
+      CREATE_USER_ID = #{record.createUserId,jdbcType=VARCHAR},
+      CREATE_USER_NAME = #{record.createUserName,jdbcType=VARCHAR},
+      CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      LAST_UPDATE_USER_ID = #{record.lastUpdateUserId,jdbcType=VARCHAR},
+      LAST_UPDATE_USER_NAME = #{record.lastUpdateUserName,jdbcType=VARCHAR},
+      LAST_UPDATE_DATE = #{record.lastUpdateDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mybatis.entity.PbEmpLeaveBatchItem" >
+    update pb_emp_leave_batch_item
+    <set >
+      <if test="batchId != null" >
+        batch_id = #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="empName != null" >
+        EMP_NAME = #{empName,jdbcType=VARCHAR},
+      </if>
+      <if test="empCode != null" >
+        EMP_CODE = #{empCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null" >
+        COMPANY_CODE = #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="applyOffPostDate != null" >
+        APPLY_OFF_POST_DATE = #{applyOffPostDate,jdbcType=DATE},
+      </if>
+      <if test="endDate != null" >
+        END_DATE = #{endDate,jdbcType=DATE},
+      </if>
+      <if test="accumFundAccount != null" >
+        ACCUM_FUND_ACCOUNT = #{accumFundAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="offPostReason != null" >
+        OFF_POST_REASON = #{offPostReason,jdbcType=VARCHAR},
+      </if>
+      <if test="offPostDesc != null" >
+        OFF_POST_DESC = #{offPostDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="transferType != null" >
+        TRANSFER_TYPE = #{transferType,jdbcType=VARCHAR},
+      </if>
+      <if test="isValid != null" >
+        is_valid = #{isValid,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null" >
+        is_del = #{isDel,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null" >
+        CREATE_USER_ID = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserName != null" >
+        CREATE_USER_NAME = #{createUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateUserId != null" >
+        LAST_UPDATE_USER_ID = #{lastUpdateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateUserName != null" >
+        LAST_UPDATE_USER_NAME = #{lastUpdateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateDate != null" >
+        LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mybatis.entity.PbEmpLeaveBatchItem" >
+    update pb_emp_leave_batch_item
+    set batch_id = #{batchId,jdbcType=VARCHAR},
+      EMP_NAME = #{empName,jdbcType=VARCHAR},
+      EMP_CODE = #{empCode,jdbcType=VARCHAR},
+      COMPANY_CODE = #{companyCode,jdbcType=VARCHAR},
+      APPLY_OFF_POST_DATE = #{applyOffPostDate,jdbcType=DATE},
+      END_DATE = #{endDate,jdbcType=DATE},
+      ACCUM_FUND_ACCOUNT = #{accumFundAccount,jdbcType=VARCHAR},
+      OFF_POST_REASON = #{offPostReason,jdbcType=VARCHAR},
+      OFF_POST_DESC = #{offPostDesc,jdbcType=VARCHAR},
+      TRANSFER_TYPE = #{transferType,jdbcType=VARCHAR},
+      is_valid = #{isValid,jdbcType=VARCHAR},
+      is_del = #{isDel,jdbcType=VARCHAR},
+      CREATE_USER_ID = #{createUserId,jdbcType=VARCHAR},
+      CREATE_USER_NAME = #{createUserName,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      LAST_UPDATE_USER_ID = #{lastUpdateUserId,jdbcType=VARCHAR},
+      LAST_UPDATE_USER_NAME = #{lastUpdateUserName,jdbcType=VARCHAR},
+      LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
